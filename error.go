@@ -18,6 +18,7 @@ func (e *eError) Unwrap() error {
 	return e.err
 }
 
+// New creates a new error with an emoji
 func New(text string, emoji string) error {
 	return &eError{
 		err:   errors.New(text),
@@ -25,6 +26,7 @@ func New(text string, emoji string) error {
 	}
 }
 
+// Wrap wraps an existing error with an emoji
 func Wrap(err error, emoji string) error {
 	return &eError{
 		err:   err,
