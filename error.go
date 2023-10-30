@@ -5,28 +5,28 @@ import (
 	"fmt"
 )
 
-type Error struct {
+type eError struct {
 	err   error
 	emoji string
 }
 
-func (e *Error) Error() string {
+func (e *eError) Error() string {
 	return fmt.Sprintf("%s %s", e.err.Error(), e.emoji)
 }
 
-func (e *Error) Unwrap() error {
+func (e *eError) Unwrap() error {
 	return e.err
 }
 
 func New(text string, emoji string) error {
-	return &Error{
+	return &eError{
 		err:   errors.New(text),
 		emoji: emoji,
 	}
 }
 
 func Wrap(err error, emoji string) error {
-	return &Error{
+	return &eError{
 		err:   err,
 		emoji: emoji,
 	}
